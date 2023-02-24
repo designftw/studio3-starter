@@ -23,6 +23,12 @@ let app = createApp({
 			this.setActive(i - 1);
 		},
 
+		deleteItemIfEmpty(i) {
+			if (!this.tasks[i]?.title) {
+				this.deleteItem(i);
+			}
+		},
+
 		clearCompleted () {
 			this.tasks = this.tasks.filter(task => !task.done);
 		},
