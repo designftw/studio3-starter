@@ -50,7 +50,7 @@ const app = createApp({
     },
   },
 })
-  .directive("focus", { mounted: (e) => e.focus() })
+  .directive("focus", (e, b) => (b.value ?? 1) && !b.oldValue && e.focus())
   .mount("#app");
 
 // For debugging
