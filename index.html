@@ -1,24 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-
-<meta charset="UTF-8">
-<title>Yet Another To-Do List</title>
-<script src="index.js" type="module"></script>
-</head>
-<body>
-	<div id="app">
-		<ma-data src="local:tasks" v-model="tasks" autosave></ma-data>
-		<h1>{{ count(get(tasks, "done")) }} done of {{ tasks.length }} total</h1>
-		<ul>
-			<li v-for="(task, i) in tasks">
-				<input type="checkbox" v-model="task.done" aria-label="Done?">
-				<input type="text" aria-label="Task" v-model="task.title">
-				<button @click="deleteItem(i)">x</button>
-			</li>
-		</ul>
-		<button @click="addItem()">Add item</button>
-		<button @click="clearCompleted()">Clear completed</button>
-	</div>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Yet Another To-Do List</title>
+        <script type="importmap">
+            {
+                "imports": {
+                    "vue": "https://cdn.jsdelivr.net/npm/vue/dist/vue.esm-browser.js"
+                }
+            }
+        </script>
+        <script src="index.js" type="module"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <template id="template">
+            <h1>
+                {{ tasks.filter(t=>t.done).length }} done of {{ tasks.length }}
+                total
+            </h1>
+            <ul>
+                <li v-for="(task, i) in tasks">
+                    <input
+                        type="checkbox"
+                        v-model="task.done"
+                        aria-label="Done?"
+                    />
+                    <input type="text" aria-label="Task" v-model="task.title" />
+                    <button @click="deleteItem(i)">x</button>
+                </li>
+            </ul>
+            <button @click="addItem()">Add item</button>
+            <button @click="clearCompleted()">Clear completed</button>
+        </template>
+    </body>
 </html>
